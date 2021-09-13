@@ -1,0 +1,7 @@
+.board__style {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}

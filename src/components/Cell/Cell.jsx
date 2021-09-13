@@ -1,14 +1,10 @@
 import React from 'react';
-
-const style = {
-    border: "2px solid red",
-    fontSize: "30px",
-}
+import style from './Cell.module.css';
 
 const Cell = ({name, onClick, value}) => {
     return (
         <button
-            style={style}
+            className={style.cell__style}
             name={name}
             onClick={onClick}
         >

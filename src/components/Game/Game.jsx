@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
-import { isWon, findOptimalPosition } from '../utils'
-import Message from "./Message";
-import Board from "./Board";
-import Reset from "./Reset";
-
-const style = {
-    padding: "15px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around"
-}
+import React, { useState, useRef, useEffect } from 'react';
+import { isWon, findOptimalPosition } from '../../utils'
+import Message from "../Message/Message";
+import Board from "../Board/Board";
+import Reset from "../Reset/Reset";
+import style from './Game.module.css';
+import { computerAnswerSpeed } from "../../constants";
 
 const Game = () => {
     const [board, setBoard] = useState(Array(9).fill(""));
 
     const [isPlayer, setIsPlayer] = useState("X");
     const [message, setMessage] = useState("Start game");
+    const mounted = useRef(false);
+
+    useEffect(() => {
+        if (mounted.current) {
+            if (isPlayer === '0') {
+                sleep(computerAnswerSpeed).then(() => {
+                    computerTurn();
+                })
+            }
+        } else {
+            mounted.current = true;
+        }
+    }, [isPlayer]);
 
     const reset = () => {
         setBoard(Array(9).fill(""));
@@ -41,7 +49,7 @@ const Game = () => {
     }
 
     const handleInput = (pos) => {
-        if (isPlayer === "" || board[pos] !== "") {
+        if (isPlayer !== "X" || board[pos] !== "") {
             return;
         }
         const boardCopy = updateBoard(pos);
@@ -57,27 +65,25 @@ const Game = () => {
         return boardCopy;
     }
 
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     const computerTurn = () => {
         const pos = findOptimalPosition(board);
-        if (isPlayer === "" || board[pos] !== "") {
+        if (board[pos] !== "") {
             return;
         }
+        console.log(pos);
         const boardCopy = updateBoard(pos);
         prepareForNextMove(boardCopy);
     }
 
-    function control(isPlayer) {
-        if (isPlayer === "X") {
-            return handleInput;
-        } else {
-            computerTurn(board);
-        }
-    }
-
     return (
-        <div style={style}>
+        <div className={style.game__style}>
             <Message value={message}/>
-            <Board onClick={control(isPlayer)} value={board} />
+            <Board onClick={handleInput} value={board} />
+            {/*<Board onClick={control(isPlayer)} value={board} />*/}
             <Reset onClick={reset} value={'Refresh'} />
         </div>
     );

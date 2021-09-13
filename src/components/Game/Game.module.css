@@ -1,0 +1,6 @@
+.game__style {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
