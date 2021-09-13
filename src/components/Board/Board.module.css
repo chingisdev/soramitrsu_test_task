@@ -4,4 +4,9 @@
     margin: 0 auto;
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    grid-gap: 2px;
+    padding: 3px;
+    border-radius: 10px;
+    /*background-color: black;*/
+    /*border: 1px solid white;*/
 }

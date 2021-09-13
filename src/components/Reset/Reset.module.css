@@ -1,8 +1,12 @@
 .reset__style {
     width: 100px;
-    height: 30px;
-    margin: 20px auto auto;
+    /*height: 30px;*/
+    margin: 20px;
+    color: #f2e9e4;
     border: none;
-    background-color: rgba(127, 20, 120, 0.5);
+    background-color: rgba(34, 34, 59, 0.5);
     border-radius: 3px;
+    cursor: pointer;
+    font-size: 18px;
+    font-style: italic;
 }

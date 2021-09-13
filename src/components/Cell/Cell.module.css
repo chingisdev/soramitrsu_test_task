@@ -1,4 +1,7 @@
 .cell__style {
-    /*border: 2px solid red;*/
+    border: none;
+    border-radius: 10px;
     font-size: 30px;
+    background-image: linear-gradient(135deg, #f8edeb 10%, #9a8c98 80%);
+    cursor: pointer;
 }

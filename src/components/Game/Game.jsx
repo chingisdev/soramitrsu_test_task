@@ -80,9 +80,11 @@ const Game = () => {
 
     return (
         <div className={style.game__style}>
-            <Message value={message}/>
+            <div className={style.info__style}>
+                <Message value={message}/>
+                <Reset onClick={reset} value={'Refresh'} />
+            </div>
             <Board onClick={handleInput} value={board} />
-            <Reset onClick={reset} value={'Refresh'} />
         </div>
     );
 };
