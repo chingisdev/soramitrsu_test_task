@@ -27,7 +27,7 @@ const findDimensions = (searcher, opponent) => {
     const fullness = []
     for (let i = 0; i < winningPositions.length; i++) {
         let count = 0;
-        let array = winningPositions[i];
+        const array = winningPositions[i];
         for (let j = 0; j < array.length; j++) {
             let pos = array[j];
             if (opponent[pos] !== -1) {
@@ -48,17 +48,19 @@ const findDimensions = (searcher, opponent) => {
 
 
 const hasCriticalMove = (fullness) => {
-    return fullness.indexOf(2);
+    return fullness.indexOf(2) !== -1 ? 1 : 0;
+}
+
+const choseDimension = (fullness) => {
+    const maxPossibleDimension = fullness.indexOf(2);
+    if (maxPossibleDimension > -1) {
+        return maxPossibleDimension;
+    }
+    return fullness.indexOf(1);
 }
 
 const findEmptyCells = (board, way) => {
-    const result = [];
-    for (let i = 0; i < way.length; i++) {
-        if (board[way[i]] === '') {
-            result.push(way[i]);
-        }
-    }
-    return result;
+    return way.filter((cell) => board[cell] === '');
 }
 
 const findEmpty = (board) => {
@@ -69,34 +71,29 @@ function random(array) {
     return Math.floor(Math.random() * array.length);
 }
 
-function attack(cpuPositions, playerPositions, board) {
-    const {dimensions: cpuDimension, fullness: cpuFul} = findDimensions(cpuPositions, playerPositions);
+function attack(board, cpuDimension, cpuFul) {
     if (cpuDimension.length) {
-        let ownMove = hasCriticalMove(cpuFul);
-        if (ownMove === -1) {
-            ownMove = cpuFul.indexOf(1);
-        }
-        const cpuRow = cpuDimension[ownMove];
-        const possibleCells = findEmptyCells(board, cpuRow)
-        return possibleCells[random(possibleCells)];
+        return makeStep(cpuDimension, cpuFul, board);
     } else {
         return findEmpty(board);
     }
 }
 
-function defence(playerDim, response, board) {
-    const row = playerDim[response];
+function makeStep(dimension, fullness, board) {
+    const maxIndex = choseDimension(fullness);
+    const row = dimension[maxIndex];
     const possibleCells = findEmptyCells(board, row);
     return possibleCells[random(possibleCells)];
 }
 
 function detectPosition(playerPositions, cpuPositions, board) {
     const {dimensions: playerDim, fullness: playerFul} = findDimensions(playerPositions, cpuPositions);
-    const response = hasCriticalMove(playerFul);
-    if (response === -1) {
-        return attack(cpuPositions, playerPositions, board);
+    const {dimensions: cpuDimension, fullness: cpuFul} = findDimensions(cpuPositions, playerPositions);
+    const response = !hasCriticalMove(playerFul) || hasCriticalMove(cpuFul);
+    if (response) {
+        return attack(board, cpuDimension, cpuFul);
     } else {
-        return defence(playerDim, response, board);
+        return makeStep(playerDim, playerFul, board);
     }
 }
 
