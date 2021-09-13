@@ -74,7 +74,6 @@ const Game = () => {
         if (board[pos] !== "") {
             return;
         }
-        console.log(pos);
         const boardCopy = updateBoard(pos);
         prepareForNextMove(boardCopy);
     }
@@ -83,7 +82,6 @@ const Game = () => {
         <div className={style.game__style}>
             <Message value={message}/>
             <Board onClick={handleInput} value={board} />
-            {/*<Board onClick={control(isPlayer)} value={board} />*/}
             <Reset onClick={reset} value={'Refresh'} />
         </div>
     );
