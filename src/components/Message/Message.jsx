@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './Message.module.css';
+import './Message.css';
 
-const Message = ({ value }) => {
+function Message({ value }) {
     return (
-        <h2 className={style.message__style}>{value}</h2>
+        <p className={"message__style"}>{value}</p>
     );
-};
+}
 
 export default Message;

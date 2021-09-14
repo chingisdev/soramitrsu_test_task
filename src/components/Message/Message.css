@@ -1,0 +1,26 @@
+.message__style {
+    margin: 20px;
+    color: #f2e9e4;
+    /*height: 30px;*/
+    font-size: 20px;
+    font-weight: bold;
+    /*line-height: 30px;*/
+}
+
+@media screen and (max-width: 425px) {
+    .message__style {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .message__style {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .message__style {
+        font-size: 20px;
+    }
+}
