@@ -10,7 +10,7 @@ const Game = () => {
     const [board, setBoard] = useState(Array(9).fill(""));
 
     const [isPlayer, setIsPlayer] = useState("X");
-    const [message, setMessage] = useState("Make first move!");
+    const [message, setMessage] = useState("Make first move.");
     const mounted = useRef(false);
 
     useEffect(() => {
