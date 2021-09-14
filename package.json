@@ -1,6 +1,6 @@
 {
-  "name": "soramitrsu_test_task",
-  "homepage": "https://chingisdev.github.io/soramitrsu_test_task",
+  "name": "soramitsu_test_task",
+  "homepage": "https://chingisdev.github.io/soramitsu_test_task",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
